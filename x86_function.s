@@ -1,3 +1,4 @@
+
 section .data
 minusTen: dd -10.0
 delta: dd 100.0
@@ -37,6 +38,9 @@ x86_function:
 ;	XMM1 - B
 ;	XMM2 - C
 ;	XMM3 - S
+	push r15
+	push r14
+	push r13
 	xor r13, r13
 	movlhps xmm0,xmm0 ; A|A
 	movlhps xmm1,xmm1 ; B|B
@@ -194,7 +198,9 @@ bisectionElse:
 	pozaPetla:
 end:
 ;------------------------------------------------------------------------------
-
+	pop r13
+	pop r14
+	pop r15
 	mov rsp, rbp	; restore original stack pointer
 	pop rbp		; restore "calling procedure" frame pointer
 	ret
